@@ -1,8 +1,15 @@
 # //--------docker basics----------//
 ## CONTAINERS:
-- :baby:criar container da imagem nginx, nome nginx1, modo detach, expor a minha porta host 8080 pela 80 do container:
+- :baby: exemplo:
+  -  criar container da imagem nginx, 
+  -  nome nginx1, 
+  -  modo detach, 
+  -  limitando esse container a utilizar somente 512 MB de RAM,
+  -  limitando a utilizar somente 50% do CPU,
+  -  mapeia volume na minha porta host pela porta do container, 
+  -  expor a minha porta host 8080 pela 80 do container:
 ~~~
-docker container run --name nginx1 -d -p 8080:80 nginx
+docker container run --name nginx1 -d -m 512M -c=".5" -v <host>:<container> -p 8080:80 nginx
 ~~~
 - :writing_hand: executar container em modo interativo da linha de comando
 ~~~
@@ -24,11 +31,11 @@ docker status <container ID ou nome>
 ~~~
 docker container start/stop <container ID ou nome>
 ~~~
-- :skull:deletar container:
+- :skull: deletar container:
 ~~~
 docker rm <nome container ou id>
 ~~~
-- :skull:deletar TODOS containers:
+- :skull: deletar TODOS containers:
 ~~~
 docker rm $(docker ps -qa)
 ~~~
@@ -66,4 +73,9 @@ docker image tag <nome da imagem>:<TAG>
 ~~~
 docker build -t <usuario dockerhub/nome da sua imagem> .
 ~~~
-### Diferente do RUN, o CMD executa apenas na criação do container e não no build da imagem. Deve ser único no Dockerfile.
+ 
+:thinking: toda documentação pelo comando:
+~~~
+docker --help
+~~~
+### :open_mouth:!!!Diferente do RUN, o CMD executa apenas na criação do container e não no build da imagem. Deve ser único no Dockerfile.!!!
