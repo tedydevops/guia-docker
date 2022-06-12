@@ -73,6 +73,11 @@ docker image tag <nome da imagem>:<TAG>
 ~~~
 docker build -t <usuario dockerhub/nome da sua imagem> .
 ~~~
+## DOCKER COMPOSE (sobe uma aplicação inteira, diversos containers, com um comando):
+- :point_up: na pasta com o arquivo docker_compose.yaml: 
+~~~
+docker compose up
+~~~
  
 :thinking: toda documentação pelo comando:
 ~~~
