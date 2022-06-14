@@ -105,6 +105,14 @@ docker swarm join <token enorme exibido do Leader>
 ~~~
 docker node promote/demote <nome node>
 ~~~
+- adicionar manager: primeiro precisa gerar o token a ser colado no nó vazio, faça na maquina Leader:
+~~~
+docker swarm join-token manager
+~~~
+- adicionar worker: primeiro precisa gerar o token a ser colado no nó vazio, faça na maquina worker:
+~~~
+docker swarm join-token worker
+~~~
 - services:
 ~~~
 docker service create --name <name> --replicas/--help
