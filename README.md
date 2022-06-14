@@ -13,7 +13,7 @@ docker container run --name nginx1 -d -m 512M -c=".5" -v <host>:<container> -p 8
 ~~~
 - :writing_hand: executar container em modo interativo da linha de comando
 ~~~
-docker container exec -it <container ID ou nome>
+docker container exec -it <container ID ou nome> bash
 ~~~
 - :eyes: checar quais conteiners running:
 ~~~
@@ -79,6 +79,48 @@ docker build -t <usuario dockerhub/nome da sua imagem> .
 docker compose up
 ~~~
  
+:thinking: toda documentação pelo comando:
+~~~
+docker --help
+~~~
+
+## DOCKER SWARM
+1) iniciar vai gerar um leader e gerar um token:
+~~~
+docker swarm init
+~~~
+2) vai ser gerado um comando para adicionar worker nodes,
+ - esse comando deve ser adicionado em cada maquina, 
+  - mas para ser adicionado,
+   - deve instalar antes docker pelo curl, 
+    - e depois com sudo -su mudar nome do hostname:
+~~~
+curl -fsSL <.site docker...> | bash
+hostname <nome do host mostrado no docker node ls do Leader>
+docker swarm join <token enorme exibido do Leader>
+~~~
+- obs: mínimo de 1 cluster, numero impar para nao derrubar cluster: mais de 50% cluster ativos, sistema eleição
+- obs:dentro do cluster qualquer ação binda o cluster todo
+- o Leader permite que outros nós possam virar/desvirar Leader:
+~~~
+docker node promote/demote <nome node>
+~~~
+- services:
+~~~
+docker service create --name <name> --replicas/--help
+~~~
+~~~
+docker service
+...            ps/inspect/scale/rm/rollback/update
+~~~
+- volumes:
+~~~
+docker volume
+~~~
+- network:
+~~~
+docker network create -d overlay <name>
+~~~
 :thinking: toda documentação pelo comando:
 ~~~
 docker --help
