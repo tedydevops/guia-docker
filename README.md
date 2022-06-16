@@ -6,10 +6,23 @@
   -  modo detach, 
   -  limitando esse container a utilizar somente 512 MB de RAM,
   -  limitando a utilizar somente 50% do CPU,
-  -  mapeia volume na minha porta host pela porta do container, 
+  -  mapeia volume (de nome aleatorio é hash) na minha porta host pela porta do container, 
   -  expor a minha porta host 8080 pela 80 do container:
 ~~~
 docker container run --name nginx1 -d -m 512M -c=".5" -v <host>:<container> -p 8080:80 nginx
+~~~
+- volumes: 
+  - tipo bind: fazer um diretorio atual ser montado dentro do container:
+~~~
+docker container run --mount type=bind,src=</diretorio a ser copiado para conteiner>,dst=/<pasta destino no container>
+~~~
+  - tipo volume: o diretorio do "/var/lib/docker/volumes/<nome do arquivo a ser copiado" sera o volume de dentro do conteiner:
+~~~
+docker container run --mount type=bind,src=</diretorio a ser copiado para conteiner>,dst=/<pastadestinonocontainer>
+~~~
+  - comandos gerais a partir do volume: 
+~~~
+docker volume ps/inspect/rm
 ~~~
 - :writing_hand: executar container em modo interativo da linha de comando
 ~~~
@@ -34,6 +47,10 @@ docker container start/stop <container ID ou nome>
 - :skull: deletar container:
 ~~~
 docker rm <nome container ou id>
+~~~
+- :skull: deletar TODOS containers que não estão em uso:
+~~~
+docker container prune
 ~~~
 - :skull: deletar TODOS containers:
 ~~~
@@ -119,11 +136,7 @@ docker service create --name <name> --replicas/--help
 ~~~
 ~~~
 docker service
-...            ps/inspect/scale/rm/rollback/update
-~~~
-- volumes:
-~~~
-docker volume
+...            ps/inspect/scale/rm/rollback/update/prune
 ~~~
 - network:
 ~~~
